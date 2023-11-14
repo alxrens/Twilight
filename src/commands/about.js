@@ -5,10 +5,26 @@ module.exports = {
     data : new SlashCommandBuilder()
             .setName("about").setDescription("About Twilight"),
             async execute(interaction){
-                const content = `Twilight is a codename for database located in ██████.
-                It's main function is to store data with code name ██████ as a top secret information.
-                Twilight was built under codename "黄昏 たそがれ" and was built by Ren, Nahiiko, and mad scientist "ICY".
-                `;
-                await interaction.reply(content)
+                const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const axios = require('axios').default;
+
+module.exports = {
+    data : new SlashCommandBuilder()
+            .setName("urban").setDescription("Get The Internet Slang"),
+            async execute(interaction){
+                axios
+                .get("https://api.urbandictionary.com/v0/random")
+                .then((res) => {
+                    const dataLength = res.data.list.length;
+                    const randomIndex = Math.floor(Math.random() * dataLength);
+                    const randomWord = res.data.list[randomIndex];
+                    const embed = new EmbedBuilder()
+                            .setColor("#114ee8")
+                            .setTitle(randomWord.word)
+                            .setDescription(randomWord.definition)
+                    interaction.reply({embeds : [embed]});
+                })
+            }
+}
             }
 }

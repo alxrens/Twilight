@@ -1,9 +1,35 @@
+const { ActivityType } = require('discord.js');
+require('dotenv').config();
+const fs = require('fs');
+const clientId = process.env.CLIENT_ID;
+const guildId = process.env.GUILD_ID;
+const token = process.env.DISCORD_TOKEN;
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
+
 module.exports = {
 	name: 'ready',
 	once: true,
-	execute(client) {
-		console.log(`Twilight is online as ${client.user.tag}.`);
-		let activities = [`Melchior-Magi 1`, `Balthasar-Magi 2`, `Casper-Magi 3`],i = 0;
-		setInterval(() => client.user.setActivity(`${activities[i++ %  activities.length]}`,	  {type:"WATCHING",url:"https://www.youtube.com/watch?v=diY6Mt_uqYs"  }), 8000);
+	async execute(client) {
+		const commands = [];
+
+		const files = fs.readdirSync('./src/commands').filter(file => file.endsWith('.js'));
+		for(const file of files){
+    	const command = require(`../commands/${file}`);
+    	commands.push(command.data.toJSON());
+	}
+
+		const rest = new REST({ version: '9' }).setToken(token);
+
+	await rest.put(Routes.applicationCommands(clientId), {body : commands})
+    .then(() => console.log('Successfully registered application commands.'))
+    .catch(console.error);
+
+	console.log(`Twilight is online as ${client.user.tag}.`);
+	client.user.setActivity('https://www.youtube.com/watch?v=XsWUJMqmd3U' , { type: ActivityType.Listening});
+	client.user.setStatus('dnd');
+
+
+
 	},
 };
