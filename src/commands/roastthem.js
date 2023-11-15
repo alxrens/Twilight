@@ -5,7 +5,7 @@ module.exports = {
     data : new SlashCommandBuilder()
             .setName("roastthem")
             .setDescription("Roast your friends if you feel like you're a devil")
-            .addUserOption((option) => option.setName('target').setDescription('Who do you want to roast?').setRequired(true)),
+            .addUserOption((option) => option.setName('target').setDescription('Who do you want to roast?').setRequired(false)),
             async execute(interaction){
                 const target = interaction.options.getUser("target");
                 if (!target) {
