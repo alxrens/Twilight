@@ -1,4 +1,3 @@
-// The Nothing.
 // Parsed from @muratpak circa September 2021 by mathdroid.eth
 // Contains a little over 4000 tweets from Murat Pak.
 
