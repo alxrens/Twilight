@@ -15,7 +15,8 @@ module.exports = {
                         {name : "add", value : "add"},
                         {name : "subtract", value : "subtract"},
                         {name : "multiply", value : "multiply"},
-                        {name : "divide", value : "divide"}
+                        {name : "divide", value : "divide"},
+                        {name : "sqrt", value : "sqrt"}
                         )
                     
                     ).addIntegerOption(option => option.setName('second_number')
@@ -42,6 +43,9 @@ module.exports = {
                     await interaction.reply(`${first_number} * ${second_number} = ${parseInt(first_number) * parseInt(second_number)}`)
                 }else if(equation == "divide"){
                     await interaction.reply(`${first_number} / ${second_number} = ${parseInt(first_number) / parseInt(second_number)}`)
+                }else if(equation == "sqrt"){
+                    let result = Math.sqrt(first_number, second_number)
+                    await interaction.reply(`${second_number}√ ${first_number} = ${result}`)
                 }
             }
 }
