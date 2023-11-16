@@ -1,7 +1,7 @@
 // Parsed from @muratpak circa September 2021 by mathdroid.eth
 // Contains a little over 4000 tweets from Murat Pak.
 
-const { SlashCommandBuilder } = require("discord.js")
+
 
 const wisdom = [
     `Fake technical support is one of my favorite things to do.`,
@@ -4769,7 +4769,7 @@ const wisdom = [
     `Noodle noodle noodle node.`,
     ]
     
-   
+const { SlashCommandBuilder } = require("discord.js")
     module.exports = {
         data : new SlashCommandBuilder()
             .setName('wisdom').setDescription('wisdom Word by Pak'),

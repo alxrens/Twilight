@@ -5,20 +5,11 @@ require('dotenv').config()
 const tags = [];
 const toss = [];
 const nsfwo = []
-let uri = `https://api.waifu.im/search?included_tags=waifu`;
 
 axios.get("https://api.waifu.im/tags")
   .then((res) => {
     const versatile = res.data.versatile;
     const nsfw = res.data.nsfw;
-
-    for (let i = 0; i < versatile.length; i++) {
-      if (versatile[i] == "marin-kitagawa" || versatile[i] == "raiden-shogun" || versatile[i] == "mori-calliope") {
-        toss.push(versatile[i]);
-      } else {
-        tags.push({ name: versatile[i], value: versatile[i] });
-      }
-    }
 
     for (let i = 0; i < nsfw.length; i++) {
       tags.push({ name: `(18++) ${nsfw[i]}`, value: nsfw[i] });
@@ -40,7 +31,6 @@ module.exports = {
     }),
   async execute(interaction) {
     let chosenTag = interaction.options.getString("tag");
-    let getChoice = interaction.options.get
     if(interaction.channel.name !== process.env.NSFW_CHANNEL && nsfwo.includes(chosenTag)){
         return interaction.reply(`you're using this tag on SFW channel?? there's a lot of child here you pervert!! >:(`);
     }

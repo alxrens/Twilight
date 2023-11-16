@@ -121,29 +121,8 @@ const quotes = [
     }
   ]
 
-  const evangelionImage = [
-    "https://wiki.evageeks.org/images/2/2a/25%27_title2_theatrical.jpg",
-    "https://wiki.evageeks.org/images/thumb/2/27/26%27_title2_video.jpg/1200px-26%27_title2_video.jpg",
-    "https://static.wikia.nocookie.net/evangelion/images/6/65/NGE01_71.png/revision/latest/scale-to-width-down/1000?cb=20190901082549",
-    "https://static.wikia.nocookie.net/evangelion/images/b/b3/NGE02_68.png/revision/latest?cb=20190930060126",
-    "https://i.pinimg.com/originals/0e/ae/0e/0eae0eed87530575edaaebdbe8c103d0.png",
-    "https://i.pinimg.com/736x/8d/03/cc/8d03cc298b5067888f83730a47783995.jpg",
-    `https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/98394c76-095d-45fc-a2bb-f4e0b540ccce/dag88om-44c0b742-d505-4175-9180-fec55409f1a3.png/v1/fill/w_1192,h_670,q_70,strp/neon_genesis_evangelion_episode_5_by_thereuplord_dag88om-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA4MCIsInBhdGgiOiJcL2ZcLzk4Mzk0Yzc2LTA5NWQtNDVmYy1hMmJiLWY0ZTBiNTQwY2NjZVwvZGFnODhvbS00NGMwYjc0Mi1kNTA1LTQxNzUtOTE4MC1mZWM1NTQwOWYxYTMucG5nIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.ItRGPxjwbL9GYuzSCR3T1OhgVczI8Vpx0Z6GJhl8_sg`
-    `https://i.pinimg.com/736x/1f/41/d4/1f41d456d0a6c8b8e67708a31ee02556.jpg`,
-    `https://i.pinimg.com/originals/2c/4b/97/2c4b97d5e4afa9a89174cba863c71540.png`,
-    `https://i.pinimg.com/originals/62/0c/a4/620ca47488590018551a66f91c4128a8.png`,
-    `https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/98394c76-095d-45fc-a2bb-f4e0b540ccce/dag8943-ae1478f3-1064-463d-8c3d-ab2b3397b8bc.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk4Mzk0Yzc2LTA5NWQtNDVmYy1hMmJiLWY0ZTBiNTQwY2NjZVwvZGFnODk0My1hZTE0NzhmMy0xMDY0LTQ2M2QtOGMzZC1hYjJiMzM5N2I4YmMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.TvYD4aOnILdW9tPJbXYBlx900XBlWfnCg8A5179xuy0`,
-    `https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/98394c76-095d-45fc-a2bb-f4e0b540ccce/dag899o-5cb1a324-ac35-4384-aff1-9658bf476bba.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk4Mzk0Yzc2LTA5NWQtNDVmYy1hMmJiLWY0ZTBiNTQwY2NjZVwvZGFnODk5by01Y2IxYTMyNC1hYzM1LTQzODQtYWZmMS05NjU4YmY0NzZiYmEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.4uoyMp4ZtjSnN0bGn3uDXgU8gSt276m_4iIRg7_DnE0`,
-    `https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/98394c76-095d-45fc-a2bb-f4e0b540ccce/dag89fv-1d16792f-f19b-4be1-b9be-f18514d77809.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk4Mzk0Yzc2LTA5NWQtNDVmYy1hMmJiLWY0ZTBiNTQwY2NjZVwvZGFnODlmdi0xZDE2NzkyZi1mMTliLTRiZTEtYjliZS1mMTg1MTRkNzc4MDkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.PoyrFNqTEogVHZ9RI3oxxaL5ZGFypwZK0DUZc8Lrnuo`,
-    `https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/98394c76-095d-45fc-a2bb-f4e0b540ccce/dag89mu-3f084a1f-5cb0-4d7c-857e-e2ba0b8214f9.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk4Mzk0Yzc2LTA5NWQtNDVmYy1hMmJiLWY0ZTBiNTQwY2NjZVwvZGFnODltdS0zZjA4NGExZi01Y2IwLTRkN2MtODU3ZS1lMmJhMGI4MjE0ZjkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.qqwWeAnUwSYB1IJgMiAwSZb5mWCL85fveUIvRIm0ILg`,
-    `https://i.pinimg.com/736x/8d/34/bd/8d34bdaa6b16812c601c33a3dbb30584.jpg`,
-    `https://i.pinimg.com/originals/8e/8e/9d/8e8e9de6505108746ed1f636e0b72f3a.png`,
-    `https://preview.redd.it/ax4hntjphc081.jpg?width=640&crop=smart&auto=webp&s=f6d0dabd40e429894bb6bfa26f18db651852bc95`,
-    
-
-
-]
-  const { SlashCommandBuilder } = require("discord.js")
+  const { SlashCommandBuilder } = require("discord.js");
+  const axios = require('axios').default;
   module.exports = {
     data : new SlashCommandBuilder()
         .setName('evangelionquote').setDescription('angel is dead, but you can still live'),
