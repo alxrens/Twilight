@@ -1,4 +1,4 @@
-  <h1 align="center"> ⚇Twilight⚇ </h1>
+<h1 align="center"> ⚇Twilight⚇ </h1>
 <p align="center">Twilight is a project name and a discord bot name i Initialized. this discord bot is developed by me and my friend kira. this project was originally because of me want to joining a codevember and learning some interesting stuffbut it's more fun than what i thought it'll be.</p>
 
 
@@ -62,18 +62,20 @@ that's all :D.
 
 
 <p align= "center">https://animechan.xyz for waifu pic</p>
-<p align = "center">https://meme-api.com for the meme source</p>
+<p align= "center">https://meme-api.com for the meme source</p>
 <p align= "center">https://evilinsult.com for the roast</p>
 <p align= "center">https://urbandictionary.com for the internet slang</p>
 <p align= "center">https://archillect.com for the stimulating images</p>
 <p align= "center">https://pexels.com for the image search</p>
+<p align= "center">https://shibe.online for the shibes, cats, and birds pics</p>
+<p align= "center">https://randomfox.ca for the foxes pics</p>
 
 
 <h2 align="center">👽About US👽</h2>
 <p align="center">tl;dr:we both are nerd.</p>
 finnksh(Ren) : I'm a proffesional software developer currently working for a chemical distribution companny and. I do Go, JS, NextJS, Rust on a daily basis.
 
-kira : (he hasn't giving any introduction yet)
+GeraldPujaya(kira) : I am a Mechatrtronics student at the University of Glasgow, currently learning Javascript with fin for experience.
 
 
 

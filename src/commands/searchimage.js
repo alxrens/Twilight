@@ -8,7 +8,7 @@ module.exports = {
     .addStringOption(option => {
         return option.setName('input')
         .setDescription('What Image You Want to Search?')
-        .setRequired(false)
+        .setRequired(true)
     }),
     async execute(interaction) {
         let res = await axios.get(`https://api.pexels.com/v1/search?query=${interaction.options.getString("input")}`,{ headers:{Authorization :process.env.PEXELS_API_KEY}});
