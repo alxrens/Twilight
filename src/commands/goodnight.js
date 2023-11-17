@@ -1,12 +1,82 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-
+const goodnight = [
+  `Thinking of you. Sleep well!`,
+  `If you promise to dream of me, I promise to dream of you.`,
+  `Goodnight! I’m sending warm hugs and sweet kisses to you.`,
+  `Night, night.`,
+  `Goodnight, my angel.`,
+  `You’re the best! Just wanted to let you know before bed.`,
+  `Wishing you the best day tomorrow, honey.`,
+  `Sleep well. I love you.`,
+  `Have the sweetest of dreams.`,
+  `Miss you. Have a good sleep.`,
+  `Good night to the most beautiful person on earth.`,
+  `Sleep well. But if you get insomnia, I’m just a text away!`,
+  `I’m so grateful for your presence in my life, even when we’re not together. Good night!`,
+  `I just couldn’t sleep without saying I love you. Good night, my love.`,
+  `My name is written on your lips, and my love is written in your heart. Good night.`,
+  `The night sky of my life has only one star and that’s you. Good night.`,
+  `I love you more every day. Good night.`,
+  `Sleep well. You are my favorite dream.`,
+  `Tomorrow night, I’ll kiss you to sleep. Tonight, I’ll just dream about it.`,
+  `My prayer is that you will always fall asleep knowing how deeply you are loved.`,
+  `If I were the Sandman, I’d add extra sparkle to your sand, and extra sweetness to your dreams.`,
+  `You’re probably asleep, but I want this to be the first thing you see in the morning: I love you.`,
+  `Dreaming that I wake up beside you tomorrow morning. Good night, love.`,
+  `Savor your rest, you deserve it.`,
+  `Sending you a million kisses before you close your eyes. Love you and good night.`,
+  `I love getting to be the person who tells you goodnight—tonight and every night!`,
+  `May the angels watch over you as you sleep, my love.`,
+  `If you get cold tonight, I hope you feel the warmth of my love blanketing you.`,
+  `May your dreams be filled with happiness, just like you fill my heart with joy.`,
+  `Good night, love. If you have a nightmare, don’t call me. I need my beauty sleep!`,
+  `Good night. Sleep tight. Don’t let the bedbugs bite.`,
+  `Sleep well and dream of your favorite person…me!`,
+  `Sleep well and dream of me…or pizza—whichever you prefer.`,
+  `Hoping you savor a night without my snoring. Sleep well!`,
+  `There’s a reason they call it ‘beauty sleep.’ And you’re the poster child!`,
+  `Let the monsters under your bed know they’re going to have a stern talking to if they keep you up.`,
+  `Sleep like a bear in hibernation!`,
+  `Baby, you must be exhausted from looking so good all the time!`,
+  `I’d call and sing you a lullaby, but that would probably cause you nightmares.`,
+  `Why are you still awake? Go to bed!`,
+  `The Beatles may have believed that all you need is love, but they were wrong. All you really need is sleep. Luckily, I got both!`,
+  `Hurry and go to sleep…so you can dream of me!`,
+  `Sleep tight and don’t forget to set your alarm so you can hit ‘Snooze’ ten times in the morning.`,
+  `Good night, love.`,
+  `Goodnight, I miss you!`,
+  `Good night, sleep tight.`,
+  `Good night, babe.`,
+  `Sweet dreams.`,
+  `Good night, you are loved.`,
+  `Good night. I love you.`,
+  `Good night, honey.`,
+  `Hope you had a great day. Good night.`,
+  `Thinking of you. Good night.`,
+  `Hasta mañana! See you in the morning.`,
+  `Miss you already. Good night, love!`,
+  `My dreams would only be sweeter if you were here. Good night, love you.`,
+  `Good night! May all your dreams be as beautiful as you are.`,
+  `I wish we didn’t have to sleep, so we could just keep talking!`,
+  `My bed feels so empty without you in it.`,
+  `I think we really ought to move in together at this point. Texting ‘good night’ isn’t cutting it.`,
+  `I’m already looking forward to your good morning text.`,
+  `NGL, I might be up all night thinking about you!`,
+  `I’m only a text away if you feel lonely tonight…`,
+  `If we were together, I’m sure we wouldn’t be getting any sleep tonight!`,
+  `I want your face to be the last thing I see at night and the first thing I see in the morning.`,
+  `Sleep tight and enjoy the lovely dreams coming your way…of me, I hope.`,
+  `As much as I’d love to keep you up, I’ll let you get some sleep.`,
+  `Good night, I hope you have a nice night.`
+  ]
 
 
 module.exports = {
   data : new SlashCommandBuilder()
       .setName('goodnight').setDescription('sweet dream'),
   async execute(interaction){
-      interaction.reply(`Good night, I hope you have a nice night.`);
+    const text = goodnight[Math.floor(Math.random() * goodnight.length)];
+    await interaction.reply(text);
   }
 }
