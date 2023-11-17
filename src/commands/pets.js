@@ -1,9 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const axios = require('axios').default;
 
-
-
-
 module.exports = {
     data: new SlashCommandBuilder()
       .setName("pets")
@@ -21,11 +18,6 @@ module.exports = {
             { name: 'male_horse', value: 'male_horse'}
           );
       }),
-
-        
-
-
-
         async execute(interaction) {
             let pet = interaction.options.getString("pets");
     

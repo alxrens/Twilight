@@ -26,10 +26,7 @@ module.exports = {
     .catch(console.error);
 
 	console.log(`Twilight is online as ${client.user.tag}.`);
-	client.user.setActivity('https://www.youtube.com/watch?v=XsWUJMqmd3U' , { type: ActivityType.Listening});
+	client.user.setActivity('your voice' , { type: ActivityType.Listening});
 	client.user.setStatus('dnd');
-
-
-
 	},
 };

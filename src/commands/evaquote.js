@@ -125,7 +125,7 @@ const quotes = [
   const axios = require('axios').default;
   module.exports = {
     data : new SlashCommandBuilder()
-        .setName('evangelionquote').setDescription('angel is dead, but you can still live'),
+        .setName('evaquote').setDescription('angel is dead, but you can still live'),
     async execute(interaction){
         const quote = quotes[Math.floor(Math.random() * quotes.length)];
         interaction.reply(`${quote.quote} - ${quote.author}`);
