@@ -65,7 +65,7 @@ that's all :D.
 <p align = "center">https://meme-api.com for the meme source</p>
 <p align= "center">https://evilinsult.com for the roast</p>
 <p align= "center">https://urbandictionary.com for the internet slang</p>
-<p align= "center">https://arcchilect.com for the stimulating images</p>
+<p align= "center">https://archillect.com for the stimulating images</p>
 <p align= "center">https://pexels.com for the image search</p>
 
 
