@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/app.js",
-    "deploy" : "node src/pushCommand.js"
-    
+    "deploy": "node src/pushCommand.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +15,7 @@
     "@discordjs/builders": "^1.7.0",
     "@discordjs/rest": "^2.1.0",
     "axios": "^1.6.1",
+    "bcrypt": "^5.1.1",
     "discord-api-types": "^0.37.63",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1"
