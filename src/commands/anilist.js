@@ -108,7 +108,7 @@ require('dotenv').config();
                 let list = animeTitles.join(`\n`);
                 const firstEmbed = new EmbedBuilder()
                     .setColor('#2e51a2')
-                    .setTitle(`Here's your top 10 Matching Results for ${animeName}`)
+                    .setTitle(`Here's your top 10 Matching Results for ${animeName}, and please pick a number for the details of the anime.`)
                     .setDescription(list);
                 interaction.reply({ embeds: [firstEmbed], components : [row1, row2, row3] });
 
@@ -253,7 +253,7 @@ require('dotenv').config();
                             let list = animeTitles.join(`\n`);
                             const embed = new EmbedBuilder()
                                 .setColor('#2e51a2')
-                                .setTitle(`Here's your top 10 Matching Results for ${animeName}`)
+                                .setTitle(`Here's your top 10 Matching Results for ${animeName}, and please pick a number for the details of the anime.`)
                                 .setDescription(list);
                             await interaction.update({ embeds: [embed] });
                         }
