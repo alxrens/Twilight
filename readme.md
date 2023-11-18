@@ -1,5 +1,5 @@
 <h1 align="center"> ⚇Twilight⚇ </h1>
-<p align="center">Twilight is a project name and a discord bot name i Initialized. this discord bot is developed by me and my friend kira. this project was originally because of me want to joining a codevember and learning some interesting stuffbut it's more fun than what i thought it'll be.</p>
+<p align="center">Twilight is a project and a discord bot name I Initialized. This discord bot is developed by me and my friend kira. this project was originally because of me wanting to join a codevember and learning some interesting stuff but It's more fun than what I thought It'll be.</p>
 
 
 <h2 align="center">🚧Road Map🚧</h2>
@@ -12,7 +12,6 @@
   - Moderation
   - black jack
   - Holdem poker
-  - anime list
   - manhwa list
   - Containerize to docker
   - integration with database(postgreSQL)
@@ -24,6 +23,7 @@
 ```
 for now we're using slash command.
   - about : back story of this bot.
+  - anilist : search some info about anime.
   - aniquote : get random anime quote.
   - archillect : get stimulating image powered by Archillect.
   - dank : get those dank meme boi.
@@ -42,7 +42,7 @@ for now we're using slash command.
 ```
 
 <h2 align="center">📡Runing The Bot On Your Own📡</h2>
-<p align="center">This bot is on early development but you want to run it on your machine? you absolutely can!!. here's the requirement and the command you need to run is this bot.</p>
+<p align="center">This bot is in early development but you want to run it on your machine? you absolutely can!!. here's the requirement and the command you need to run is this bot.</p>
 
 ```
 requirement:
@@ -69,6 +69,7 @@ that's all :D.
 <p align= "center">https://pexels.com for the image search</p>
 <p align= "center">https://shibe.online for the shibes, cats, and birds pics</p>
 <p align= "center">https://randomfox.ca for the foxes pics</p>
+<p align= "center">https://jikan.moe/ for the anime list</p>
 
 
 <h2 align="center">👽About US👽</h2>

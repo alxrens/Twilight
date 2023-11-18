@@ -32,7 +32,7 @@ module.exports = {
   async execute(interaction) {
     let chosenTag = interaction.options.getString("tag");
     if(interaction.channel.name !== process.env.NSFW_CHANNEL && nsfwo.includes(chosenTag)){
-        return interaction.reply(`you're using this tag on SFW channel?? there's a lot of child here you pervert!! >:(`);
+        return interaction.reply(`you're using this tag on SFW channel?? there's a lot of child in here you pervert!! >:(`);
     }
     axios.get(`https://api.waifu.im/search?included_tags=${chosenTag}`)
       .then((res) => {

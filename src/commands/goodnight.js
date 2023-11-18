@@ -232,6 +232,7 @@ const hello = [
   `How's your day going so far?`
   ]
 const goodmorning = [
+  `gm`,
   `Good morning!`, 
   `Morning!`, 
   `Good day!`, 
@@ -359,7 +360,7 @@ module.exports = {
   )
   .addUserOption((option) =>
   option.setName('person')
-  .setDescription('Who do you want to wish goodnight?')
+  .setDescription('Who do you want to greet?')
   .setRequired(false)
   ),
 

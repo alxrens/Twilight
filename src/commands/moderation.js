@@ -1,5 +1,5 @@
 const { ButtonBuilder, ActionRowBuilder } = require("@discordjs/builders");
-const { SlashCommandBuilder, ButtonStyle, ComponentType, GuildB } = require("discord.js");
+const { SlashCommandBuilder, ButtonStyle, ComponentType } = require("discord.js");
 const axios = require('axios').default;
 const password = require('../../config/config.json').password;
 const bcrypt = require('bcrypt');
@@ -30,7 +30,7 @@ module.exports = {
         const passkey = interaction.options.getString('passkey');
 
         const verifyPass = await bcrypt.compare(passkey, password);
-        if(!verifyPass) return interaction.reply('Wrong password');
+        if(!verifyPass) return interaction.reply(`sorry you're not a mod or assigned role for this command`);
 
         const confirmation = new ButtonBuilder()
         .setCustomId('confirm')
@@ -58,7 +58,8 @@ module.exports = {
         const filter = (i) => i.user.id === interaction.user.id;
         const collector =  interaction.channel.createMessageComponentCollector({
             componentType: ComponentType.Button,
-            filter
+            filter,
+            time : 30000
         });
 
         collector.on('collect', async (interaction) => {
