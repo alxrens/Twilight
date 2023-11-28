@@ -1,7 +1,7 @@
 const sq = require('../../config/sq');
 const { DataTypes } = require('sequelize');
 
-const curency = sq.define('waifuclaim', {
+const card = sq.define('waifuclaim', {
     id: {
         type : DataTypes.STRING,
         primaryKey : true
@@ -10,11 +10,11 @@ const curency = sq.define('waifuclaim', {
         type : DataTypes.STRING,
         allowNull : false,
     },
-    malid : {
+    chid : {
         type : DataTypes.INTEGER,
         allowNull : false,
     },
-    characterName : {
+    character_name : {
         type : DataTypes.STRING,
         allowNull : false,
     }
@@ -22,3 +22,5 @@ const curency = sq.define('waifuclaim', {
 }, {
     paranoid : true
 })
+
+module.exports = card

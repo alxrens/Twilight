@@ -6,6 +6,7 @@ const guildId = process.env.GUILD_ID;
 const token = process.env.DISCORD_TOKEN;
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
+const sq = require('../../config/sq');
 
 module.exports = {
 	name: 'ready',
@@ -24,6 +25,10 @@ module.exports = {
 	await rest.put(Routes.applicationCommands(clientId), {body : commands})
     .then(() => console.log('Successfully registered application commands.'))
     .catch(console.error);
+
+	await sq.sync({alter : true}).then(() => {
+		console.log("DB IS SYNC !!!")
+	})
 
 	console.log(`Twilight is online as ${client.user.tag}.`);
 	client.user.setActivity('your voice' , { type: ActivityType.Listening});
