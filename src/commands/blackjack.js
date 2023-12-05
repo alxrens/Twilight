@@ -7,7 +7,7 @@ const games = new Map();
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("blackjack(onprogress)").setDescription("play blackjack now!!"),
+        .setName("blackjackonprogress").setDescription("play blackjack now!!"),
         async execute(interaction) {
             if(!interaction.isCommand()) return;
             
