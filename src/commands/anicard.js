@@ -25,7 +25,6 @@ const {v4: uuidv4} = require('uuid');
                 .setRequired(false))
             ,
         async execute(interaction){
-            console.log(interaction)
             const random = Math.floor(Math.random() * 134545)
             const bool = interaction.options.getBoolean('check_claim');
            const chara = await axios.get(`https://www.animecharactersdatabase.com/api_series_characters.php?character_id=${random}`, {
@@ -37,7 +36,8 @@ const {v4: uuidv4} = require('uuid');
             const name = chara.data.name;
             const image = chara.data.character_image;
             const anime = chara.data.origin;
-            charas.push({name, image, anime});
+            const chid = random;
+            charas.push({name, image, anime, chid});
             
 
             if(bool){
@@ -45,7 +45,6 @@ const {v4: uuidv4} = require('uuid');
                     type : QueryTypes.SELECT,
                     replacements : [interaction.user.id]
                 });
-                console.log(data)
                 if(data.length){
                     const embed = new EmbedBuilder()
                     .setColor("#114ee8")
@@ -66,7 +65,6 @@ const {v4: uuidv4} = require('uuid');
             
             setInterval(()=> {logs = []}, 30 * 60 * 1000)
             setInterval(generateUuid, 1000)
-            console.log(buttonId)
             if (check.length) {
                 const embed = new EmbedBuilder()
                 .setColor("#114ee8")
@@ -93,12 +91,12 @@ const {v4: uuidv4} = require('uuid');
                 .setDescription("Quick claim this card before the card is being claimed by other members")
                 .addFields({name: 'Anime Origin', value: anime})
                 .setImage(image);
-               await interaction.reply({embeds : [embed], components : [row]});
+              let message = await interaction.reply({embeds : [embed], components : [row]});
 
                 //setting up collector for the interaction lateron
                 const collector = interaction.channel.createMessageComponentCollector({
                     ComponentType : ComponentType.Button,
-                    time : 3 * 1000
+                    time : 10 * 1000
                 });
 
                 //collect the interaction
@@ -110,9 +108,7 @@ const {v4: uuidv4} = require('uuid');
                             let selectedButton = logs.indexOf(interaction.customId);
     
                             const id  = uuidv4();
-                            const character = charas[selectedButton]
-    
-                            console.log(interaction.customId, logs[selectedButton])
+                            const character = charas[selectedButton];
     
                             const embed = new EmbedBuilder()
                             .setColor("#114ee8")
@@ -135,8 +131,8 @@ const {v4: uuidv4} = require('uuid');
                             await anidb.create({
                                 id : id,
                                 user : interaction.user.id,
-                                chid : random,
-                                character_name : name
+                                chid : character.chid,
+                                character_name : character.name
                             }, () => {
                                 console.log(`${interaction.user.tag} claimed waifu ${name}`);
                             });
@@ -146,6 +142,11 @@ const {v4: uuidv4} = require('uuid');
                     }
                 })
 
+                await collector.once('end', async (interaction) => {
+                    claim.setLabel('expired').setDisabled(true);
+
+                    await message.edit({embeds : [embed], components : [row]});
+                })
             }
 
             
