@@ -7,6 +7,14 @@ const { ButtonBuilder, ActionRowBuilder } = require("@discordjs/builders");
 const {v4: uuidv4} = require('uuid');
 
 
+    let logs = [];
+    let charas = [];
+    let buttonId = uuidv4();
+
+    function generateUuid(){
+         buttonId = uuidv4();
+    }
+
 
     module.exports = {
         data : new SlashCommandBuilder()
@@ -17,6 +25,7 @@ const {v4: uuidv4} = require('uuid');
                 .setRequired(false))
             ,
         async execute(interaction){
+            console.log(interaction)
             const random = Math.floor(Math.random() * 134545)
             const bool = interaction.options.getBoolean('check_claim');
            const chara = await axios.get(`https://www.animecharactersdatabase.com/api_series_characters.php?character_id=${random}`, {
@@ -28,8 +37,8 @@ const {v4: uuidv4} = require('uuid');
             const name = chara.data.name;
             const image = chara.data.character_image;
             const anime = chara.data.origin;
+            charas.push({name, image, anime});
             
-            console.log(interaction.user.id)
 
             if(bool){
                 let data = await sq.query(`select * from waifuclaims w where w."user" = ?`, {
@@ -54,7 +63,10 @@ const {v4: uuidv4} = require('uuid');
                 replacements : [random]
             });
 
-
+            
+            setInterval(()=> {logs = []}, 30 * 60 * 1000)
+            setInterval(generateUuid, 1000)
+            console.log(buttonId)
             if (check.length) {
                 const embed = new EmbedBuilder()
                 .setColor("#114ee8")
@@ -64,11 +76,13 @@ const {v4: uuidv4} = require('uuid');
                 .setImage(image);
                 return interaction.reply({embeds : [embed]});
             }
-
+             
+             logs.push(buttonId)
+             console.log(logs[logs.length - 1])
                 //set a new button for the discord button
                 //customId is also being used as interaction id
                 let claim  = new ButtonBuilder()
-                .setCustomId("claim")
+                .setCustomId(logs[logs.length - 1])
                 .setLabel("Claim")
                 .setStyle(ButtonStyle.Success);
                 let row = new ActionRowBuilder().addComponents(claim);
@@ -79,48 +93,59 @@ const {v4: uuidv4} = require('uuid');
                 .setDescription("Quick claim this card before the card is being claimed by other members")
                 .addFields({name: 'Anime Origin', value: anime})
                 .setImage(image);
-                interaction.reply({embeds : [embed], components : [row]});
+               await interaction.reply({embeds : [embed], components : [row]});
 
                 //setting up collector for the interaction lateron
                 const collector = interaction.channel.createMessageComponentCollector({
                     ComponentType : ComponentType.Button,
-                    time : 60 * 1000
+                    time : 3 * 1000
                 });
 
                 //collect the interaction
-                collector.on('collect', async (interaction) => {
-                    //check the called interactionId
-                    if (interaction.customId === 'claim') {
-                        const id  = uuidv4();
+               await collector.once('collect', async (interaction) => {
 
-                        const embed = new EmbedBuilder()
-                        .setColor("#114ee8")
-                        .setTitle(name)
-                        .setDescription(`congratulations ${interaction.user.username} you have claimed this card`)
-                        .addFields({name: 'Anime Origin', value: anime})
-                        .setImage(image);
-                        let claim = new ButtonBuilder()
-                        .setCustomId("claim")
-                        .setLabel("Claim")
-                        .setStyle(ButtonStyle.Success)
-                        .setDisabled(true);
-                        let row = new ActionRowBuilder()
-                        .addComponents(claim);
+                    try {
+                        if (logs.includes(interaction.customId)) {
 
-                        //update the embed claimed card on the discord
-                        await interaction.update({embeds : [embed], components : [row]});
-                        
-                        //input the claimed card to the database
-                        anidb.create({
-                            id : id,
-                            user : interaction.user.id,
-                            chid : random,
-                            character_name : name
-                        }, () => {
-                            console.log(`${interaction.user.tag} claimed waifu ${name}`);
-                        });
+                            let selectedButton = logs.indexOf(interaction.customId);
+    
+                            const id  = uuidv4();
+                            const character = charas[selectedButton]
+    
+                            console.log(interaction.customId, logs[selectedButton])
+    
+                            const embed = new EmbedBuilder()
+                            .setColor("#114ee8")
+                            .setTitle(character.name)
+                            .setDescription(`congratulations ${interaction.user.username} you have claimed this card`)
+                            .addFields({name: 'Anime Origin', value: character.anime})
+                            .setImage(character.image);
+                            let claim = new ButtonBuilder()
+                            .setCustomId(logs[selectedButton])
+                            .setLabel("Claimed")
+                            .setStyle(ButtonStyle.Success)
+                            .setDisabled(true);
+                            let row = new ActionRowBuilder()
+                            .addComponents(claim);
+    
+                            //update the embed claimed card on the discord
+                            await interaction.update({embeds : [embed], components : [row]});
+                            
+                            //input the claimed card to the database
+                            await anidb.create({
+                                id : id,
+                                user : interaction.user.id,
+                                chid : random,
+                                character_name : name
+                            }, () => {
+                                console.log(`${interaction.user.tag} claimed waifu ${name}`);
+                            });
+                        }
+                    } catch (error) {
+                        console.error(error);
                     }
                 })
+
             }
 
             
