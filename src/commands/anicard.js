@@ -7,6 +7,14 @@ const { ButtonBuilder, ActionRowBuilder } = require("@discordjs/builders");
 const {v4: uuidv4} = require('uuid');
 
 
+    let logs = [];
+    let charas = [];
+    let buttonId = uuidv4();
+
+    function generateUuid(){
+         buttonId = uuidv4();
+    }
+
 
 const claimedCards = new Set();
 let unix = `claim_${uuidv4()}`
@@ -30,6 +38,8 @@ let unix = `claim_${uuidv4()}`
             const name = chara.data.name;
             const image = chara.data.character_image;
             const anime = chara.data.origin;
+            const chid = random;
+            charas.push({name, image, anime, chid});
             
 
             if(bool){
@@ -43,6 +53,7 @@ let unix = `claim_${uuidv4()}`
                     characters += `${data[j].anime_name} - ` + data[j].character_name + "\n";
                     
                 }
+
                 if(data.length){
                     const embed = new EmbedBuilder()
                     .setColor("#114ee8")
@@ -60,7 +71,9 @@ let unix = `claim_${uuidv4()}`
                 replacements : [random]
             });
 
-
+            
+            setInterval(()=> {logs = []}, 30 * 60 * 1000)
+            setInterval(generateUuid, 1000)
             if (check.length) {
                 const embed = new EmbedBuilder()
                 .setColor("#114ee8")
@@ -72,7 +85,6 @@ let unix = `claim_${uuidv4()}`
             }
 
                
-
                 //set a new button for the discord button
                 //customId is also being used as interaction id
                 let claim  = new ButtonBuilder()
@@ -121,7 +133,6 @@ let unix = `claim_${uuidv4()}`
                             .setDisabled(true);
                             let row = new ActionRowBuilder()
                             .addComponents(claim);
-                            
                             //update the embed claimed card on the discord
                             await interaction.update({embeds : [embed], components : [row], fetchReply: true});
                             
@@ -146,8 +157,6 @@ let unix = `claim_${uuidv4()}`
                     }
                     
                 })
-            
-
             
             }
     }

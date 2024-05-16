@@ -2,7 +2,7 @@
 <p align="center">Twilight is a project and a discord bot name I Initialized. This discord bot is developed by me and my friend kira. this project was originally because of me wanting to join a codevember and learning some interesting stuff but It's more fun than what I thought It'll be.</p>
 
 
-<h2 align="center">🚧Road Map🚧</h2>
+<h2 align="center">🚧To-Do List🚧</h2>
 
 ```
   - Music on VC
