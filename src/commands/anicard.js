@@ -1,5 +1,5 @@
 const sq = require('../../config/sq');
-const { SlashCommandBuilder, EmbedBuilder, ComponentType, ButtonStyle } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, ComponentType, ButtonStyle, Message } = require("discord.js");
 const axios = require('axios').default;
 const anidb = require('../models/animeclaim');
 const { QueryTypes } = require('sequelize');
@@ -8,6 +8,8 @@ const {v4: uuidv4} = require('uuid');
 
 
 
+const claimedCards = new Set();
+let unix = `claim_${uuidv4()}`
     module.exports = {
         data : new SlashCommandBuilder()
             .setName('animecard').setDescription('claim your animecard!')
@@ -29,25 +31,29 @@ const {v4: uuidv4} = require('uuid');
             const image = chara.data.character_image;
             const anime = chara.data.origin;
             
-            console.log(interaction.user.id)
 
             if(bool){
-                let data = await sq.query(`select * from waifuclaims w where w."user" = ?`, {
+                let data = await sq.query(`select w."user", w.chid, w.character_name, w.anime_name from waifuclaims w where w."user" = ?`, {
                     type : QueryTypes.SELECT,
                     replacements : [interaction.user.id]
                 });
-                console.log(data)
+                // console.log(data)
+                let characters = "";
+                for (let j = 0; j < data.length; j++) {
+                    characters += `${data[j].anime_name} - ` + data[j].character_name + "\n";
+                    
+                }
                 if(data.length){
                     const embed = new EmbedBuilder()
                     .setColor("#114ee8")
                     .setTitle("this is the card that you have claimed")
-                    .setDescription("this anime card has been claimed, roll again to claim another card")
-                    .setImage(image);
-                    interaction.reply({embeds : [embed]});
+                    .setDescription(characters)
+                    .setImage("https://asutoraeanooka.files.wordpress.com/2010/05/goodlucksaki.jpg");
+                    return interaction.reply({embeds : [embed], ephemeral : true});
                 }else{
-                    interaction.reply(`You don't have any card yet. Use /animecard to claim your card`)
+                    return interaction.reply({content:`You don't have any card yet. Use /animecard to claim your card`, ephemeral : true})
                 }
-            }else{
+            }
                 //check if the anime have been claimed or not in the database
             let check = await sq.query('select * from waifuclaims wc where wc.chid  = ?', {
                 type : QueryTypes.SELECT,
@@ -59,70 +65,89 @@ const {v4: uuidv4} = require('uuid');
                 const embed = new EmbedBuilder()
                 .setColor("#114ee8")
                 .setTitle(name)
-                .addFields({name: 'Anime Origin', value: anime})
+                .addFields({name: 'Anime Origin', value: anime, inline : true})
                 .setDescription("this anime card has been claimed, roll again to claim another card")
                 .setImage(image);
-                return interaction.reply({embeds : [embed]});
+                return await interaction.reply({embeds : [embed]});
             }
+
+               
 
                 //set a new button for the discord button
                 //customId is also being used as interaction id
                 let claim  = new ButtonBuilder()
-                .setCustomId("claim")
+                .setCustomId(unix)
                 .setLabel("Claim")
                 .setStyle(ButtonStyle.Success);
                 let row = new ActionRowBuilder().addComponents(claim);
+
+                const filter = i => i.customId.startsWith(unix) && i.isButton();
+                const collector = await interaction.channel.createMessageComponentCollector({
+                    ComponentType : ComponentType.Button,
+                    filter,
+                    idle : 20000
+                });
+
 
                 const embed = new EmbedBuilder()
                 .setColor('#2e51a2')
                 .setTitle(name)
                 .setDescription("Quick claim this card before the card is being claimed by other members")
-                .addFields({name: 'Anime Origin', value: anime})
+                .addFields({name: 'Anime Origin', value: anime, inline : true})
                 .setImage(image);
-                interaction.reply({embeds : [embed], components : [row]});
+                await interaction.reply({embeds : [embed], components : [row]});
 
                 //setting up collector for the interaction lateron
-                const collector = interaction.channel.createMessageComponentCollector({
-                    ComponentType : ComponentType.Button,
-                    time : 60 * 1000
-                });
-
+                
                 //collect the interaction
                 collector.on('collect', async (interaction) => {
                     //check the called interactionId
-                    if (interaction.customId === 'claim') {
-                        const id  = uuidv4();
-
-                        const embed = new EmbedBuilder()
-                        .setColor("#114ee8")
-                        .setTitle(name)
-                        .setDescription(`congratulations ${interaction.user.username} you have claimed this card`)
-                        .addFields({name: 'Anime Origin', value: anime})
-                        .setImage(image);
-                        let claim = new ButtonBuilder()
-                        .setCustomId("claim")
-                        .setLabel("Claim")
-                        .setStyle(ButtonStyle.Success)
-                        .setDisabled(true);
-                        let row = new ActionRowBuilder()
-                        .addComponents(claim);
-
-                        //update the embed claimed card on the discord
-                        await interaction.update({embeds : [embed], components : [row]});
-                        
-                        //input the claimed card to the database
-                        anidb.create({
-                            id : id,
-                            user : interaction.user.id,
-                            chid : random,
-                            character_name : name
-                        }, () => {
+                    console.log(collector.collected);
+                    try {
+                        if (interaction.customId.startsWith('claim_')) {
+                            const id  = uuidv4();
+                            
+                            console.log(interaction.customId)
+                            const embed = new EmbedBuilder()
+                            .setColor("#114ee8")
+                            .setTitle(name)
+                            .setDescription(`congratulations ${interaction.user.username} you have claimed this card`)
+                            .addFields({name: 'Anime Origin', value: anime, inline : true})
+                            .setImage(image);
+                            let claim = new ButtonBuilder()
+                            .setCustomId("claim")
+                            .setLabel("Claim")
+                            .setStyle(ButtonStyle.Success)
+                            .setDisabled(true);
+                            let row = new ActionRowBuilder()
+                            .addComponents(claim);
+                            
+                            //update the embed claimed card on the discord
+                            await interaction.update({embeds : [embed], components : [row], fetchReply: true});
+                            
+                            //input the claimed card to the database
+                            await   anidb.create({
+                                id : id,
+                                user : interaction.user.id,
+                                chid : random,
+                                character_name : name,
+                                anime_name : anime
+                            });
+                            claimedCards.add(random);
                             console.log(`${interaction.user.tag} claimed waifu ${name}`);
-                        });
+                             return collector.stop();
+                            
+                        }
+                        collector.on('end', (interaction)=>{
+                            interaction.update('this button is no longer available');
+                        })
+                    } catch (error) {
+                        console.log(error);
                     }
+                    
                 })
-            }
+            
 
             
-        }
+            }
     }

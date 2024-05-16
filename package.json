@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/app.js",
-    "deploy": "node src/pushCommand.js"
+    "sync" : "node src/dbsync.js"
   },
   "keywords": [],
   "author": "",

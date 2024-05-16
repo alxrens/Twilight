@@ -17,6 +17,10 @@ const card = sq.define('waifuclaim', {
     character_name : {
         type : DataTypes.STRING,
         allowNull : false,
+    },
+    anime_name : {
+        type : DataTypes.STRING,
+        allowNull : false,
     }
 
 }, {
