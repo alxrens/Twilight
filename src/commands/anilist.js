@@ -262,6 +262,9 @@ require('dotenv').config();
                        await interaction.update('something went wrong during update process')
                     }
             })
+            collector.on('end', async (collected) => {
+                await interaction.editReply({components : []})
+            })
             } catch (error) {
                 console.error(error);
                await interaction.reply('An error occurred while fetching anime data.');
